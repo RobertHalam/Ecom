@@ -2,69 +2,98 @@
 
 {% block content %}
 
-    <!-- body -->
 
-    <div class="container-fluid mt-5">
-      
-      <div class="row">
+{% load cart %}
+<!-- body -->
 
-          <!-- filter-->
+<div class="container-fluid mt-5">
 
-        <div class ="col-lg-3 mx-auto">
+    <div class="row">
 
-          <div class="list-group">
-            <a href="/" class="list-group-item list-group-item-action">All Products</a>
-            {% for category in categories %}
-            <a href="/?category={{category.id}}" class="list-group-item list-group-item-action">{{category.cate_name}}</a>
-            {% endfor %}
-          </div>
+        <!-- filter-->
+
+        <div class="col-lg-3 mx-auto">
+
+            <div class="list-group">
+                <a href="/" class="list-group-item list-group-item-action">All Products</a>
+                {% for category in categories %}
+                <a href="/?category={{category.id}}" class="list-group-item list-group-item-action">{{category.cate_name}}</a>
+                {% endfor %}
+            </div>
         </div>
-      
-
-          <!-- all-->
-        <div id= "products" class ="col-lg-9 mx-auto">
-
-          <div class='row mx-auto'>
-            {% for i in products %}       
-            <div class="card mx-auto mb-5" style="width: 18rem;">
-                <img src="{{i.prod_image.url}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">{{i.prod_name}}</h5>
-                  <p class="card-text">Price: <b>{{i.prod_price}}</b></p>
-                  <p class="card-text">Category: {{i.prod_category}}</p>
-                  <p class="card-text">Description: {{i.prod_description}}</p>
 
 
-                  <form action="/" method="POST">
+        <!-- all-->
+        <div id="products" class="col-lg-9 mx-auto">
 
-                    {% csrf_token %}
-                    <input hidden type="text" name='product' value="{{i.id}}">
-                    <input type='submit' class="btn btn-primary" value="Add To CART">
+            <div class='row mx-auto'>
+                {% for i in products %}
+                <div class="card mx-auto mb-5" id={{i.id}} style="width: 20rem;">
+                    <img style="height: 150px;" src="{{i.prod_image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{i.prod_name}}</h5>
+                        <p class="card-text">Price: <b>{{i.prod_price}}</b></p>
+                        <p class="card-text">Category: {{i.prod_category}}</p>
+                        <p class="card-text">Description: {{i.prod_description}}</p>
 
-                  </form>
-                
-                
-                
+
+                        <div class="card-footer p-0 no-gutters">
+
+
+                            {% if i|is_in_cart:request.session.cart %}
+
+                            <div class="row">
+                                <form action="/#{{i.id}}" method="post" class="col-2">
+                                    {% csrf_token %}
+                                    <input hidden type="text" name='product' value="{{i.id}}">
+                                    <input hidden type="text" name='remove' value="True">
+                                    <input type="submit" value="-" class="btn btn-block btn-success">
+
+                                </form>
+                                <div class="text-center col">{{i|cart_quantity:request.session.cart}} in cart</div>
+
+                                <form action="/#{{i.id}}" method="post" class="col-2">
+                                    {% csrf_token %}
+                                    <input hidden type="text" name='product' value="{{i.id}}">
+                                    <input type="submit" value="+" class="btn btn-block btn-success">
+
+                                </form>
+
+                            </div>
+
+                            {% else %}
+                            <form action="/#{{i.id}}" method="POST" class="btn-block">
+
+                                {% csrf_token %}
+                                <input hidden type="text" name='product' value="{{i.id}}">
+                                <input type='submit' class="float-right btn btn-primary btn-block form-control"
+                                       value="Add To CART">
+
+                            </form>
+
+
+                            {% endif %}
+                        </div>
+
+
+                    </div>
                 </div>
-            </div> 
-        
-        {% endfor %}
-        </div>
 
-
+                {% endfor %}
+            </div>
 
 
         </div>
 
 
-
-
-      </div>
-  </div>
-
+    </div>
+</div>
 
 
 {% endblock %}
+
+
+<!-- from django.contrib.auth.decorators import login_required @login_required(login_url='/example url you want redirect/') #redirect when user is not logged in def myview(request): do something return something #returns when user is logged in  -->
 
 
 

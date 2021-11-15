@@ -3,70 +3,69 @@
 {% block content %}
 
 
-
 <div class="container">
-    <div class= "p-4 m-4">
-        <div class ='col-lg-5 mx-auto border rounded p-5 '>
-<h3 class='alert alert-light border rounded '>Create An Account</h3>
+    <div class="p-4 m-4">
+        <div class='col-lg-5 mx-auto border rounded p-5 '>
+            <h3 class='alert alert-light border rounded '>Create An Account</h3>
 
             <form action="/signup" method='post'>
 
-              {% csrf_token %}
+                {% csrf_token %}
 
-              
-              {% if error %}
-              <div class="alert alert-danger" role="alert">
-                {{error}}
-              </div>
-              {% endif %}
+
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
                 <!-- first Name -->
                 <div class="form-group">
                     <label for="">First Name</label>
-                    <input required type="text" name="firstname" 
-                    id="" value='{{values.first_name}}' class="form-control" 
-                    placeholder="First Name" >
-                  </div>
-
-                  
-                   <!-- Last Name -->
-                <div class="form-group">
-                    <label for="">Last Name</label>
-                    <input required type="text" name="lastname" 
-                    id="" value='{{values.last_name}}' class="form-control" 
-                    placeholder="Last Name" >
-
-
-                      <!-- Phone -->
-                <div class="form-group">
-                    <label for="">Phone</label>
-                    <input required type="text" name="phone" 
-                    id="" value='{{values.phone}}' class="form-control" 
-                    placeholder="Phone Number" >
-
-                <!-- email -->
-                <div class="form-group">
-                  <label for="">Email</label>
-                  <input required type="email" name="email" 
-                  id="" value='{{values.email}}' class="form-control" 
-                  placeholder="email@mail.com" >
+                    <input required type="text" name="firstname"
+                           id="" value='{{values.first_name}}' class="form-control"
+                           placeholder="First Name">
                 </div>
 
 
-                 <!-- password -->
-                 <div class="form-group">
-                    <label for="">Password</label>
-                    <input required type="password" name="password" 
-                    id="" class="form-control" 
-                    placeholder="Your Password" >
-                  </div>
+                <!-- Last Name -->
+                <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input required type="text" name="lastname"
+                           id="" value='{{values.last_name}}' class="form-control"
+                           placeholder="Last Name">
 
-                  <div class="form-group">
-                
-                    <input class='btn btn-bg btn-info' type="submit" value="Sign Up">
-                  </div>
-                   
-                  </div>
-  
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="">Phone</label>
+                        <input required type="text" name="phone"
+                               id="" value='{{values.phone}}' class="form-control"
+                               placeholder="Phone Number">
+
+                        <!-- email -->
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input required type="email" name="email"
+                                   id="" value='{{values.email}}' class="form-control"
+                                   placeholder="email@mail.com">
+                        </div>
+
+
+                        <!-- password -->
+                        <div class="form-group">
+                            <label for="">Password</label>
+                            <input required type="password" name="password"
+                                   id="" class="form-control"
+                                   placeholder="Your Password">
+                        </div>
+
+                        <div class="form-group">
+
+                            <input class='btn btn-bg btn-info' type="submit" value="Sign Up">
+                        </div>
+
+                    </div>
+
             </form>
         </div>
 

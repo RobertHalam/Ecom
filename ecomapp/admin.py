@@ -3,17 +3,18 @@ from django.contrib import admin
 from .models.customer import Customer
 from .models.product import Product
 from .models.category import Category
-
+from .models.orders import Order
 
 
 class AdminProduct(admin.ModelAdmin):
-    list_display = ['prod_name','prod_price','prod_category']
+    list_display = ['prod_name', 'prod_price', 'prod_category']
 
 
 class AdminCategory(admin.ModelAdmin):
-    list_display = ['cate_name',]
+    list_display = ['cate_name', ]
 
 
-admin.site.register(Product,AdminProduct)
-admin.site.register(Category,AdminCategory)
+admin.site.register(Product, AdminProduct)
+admin.site.register(Category, AdminCategory)
 admin.site.register(Customer)
+admin.site.register(Order)
